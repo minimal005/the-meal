@@ -9,7 +9,7 @@ export const CategoryFilter: React.FC<Props> = ({
   selectedCategory,
   setSelectedCategory,
 }) => {
-  if (!categories) return null; // Якщо категорії ще не завантажились, не рендеримо нічого
+  if (!categories) return null;
 
   return (
     <div className="mb-4">

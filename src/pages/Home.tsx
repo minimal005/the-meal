@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCategories, getMeals } from "../services/api";
 import { Meal } from "../types/meal";
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { Pagination } from "../components/Pagination";
-import debounce from "lodash.debounce";
 import { MealCard } from "../components/MealCard";
 
 import { CategoryFilter } from "../components/CategoryFilter";
+import useDebounce from "../utils/useDebounce";
 
 const MEALS_PER_PAGE = 10;
 
@@ -19,15 +19,15 @@ export const Home: React.FC<Props> = ({ selectedMeals, setSelectedMeals }) => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [query, setQuery] = useState("");
 
-  const debouncedSearch = useCallback(debounce(setQuery, 300), []);
+  const debouncedSearch = useDebounce(query, 500);
 
   const {
     data: meals,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["meals", query],
-    queryFn: () => getMeals(query),
+    queryKey: ["meals", debouncedSearch],
+    queryFn: () => getMeals(debouncedSearch),
   });
 
   const { data: categories } = useQuery({
@@ -60,7 +60,7 @@ export const Home: React.FC<Props> = ({ selectedMeals, setSelectedMeals }) => {
           type="text"
           value={query}
           placeholder="Введіть назву страви"
-          onChange={(e) => debouncedSearch(e.target.value)}
+          onChange={(e) => setQuery(e.target.value)}
           className="border p-2 mb-4"
         />
       </form>

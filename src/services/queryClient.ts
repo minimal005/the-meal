@@ -4,7 +4,7 @@ import { experimental_createPersister } from "@tanstack/query-persist-client-cor
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      gcTime: 1000 * 30,
+      gcTime: 1000 * 60 * 60 * 24,
       networkMode: "offlineFirst",
       persister: experimental_createPersister({
         storage: {
