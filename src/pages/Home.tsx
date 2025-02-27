@@ -69,19 +69,18 @@ export const Home: React.FC<Props> = ({ selectedMeals, setSelectedMeals }) => {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
-      {visibledMeals.map((meal) => (
-        <MealCard
-          key={meal.idMeal}
-          meal={meal}
-          selectedMeals={selectedMeals}
-          setSelectedMeals={setSelectedMeals}
-        />
-      ))}
+      <div className="flex flex-wrap gap-6 justify-center">
+        {visibledMeals.map((meal) => (
+          <MealCard
+            key={meal.idMeal}
+            meal={meal}
+            selectedMeals={selectedMeals}
+            setSelectedMeals={setSelectedMeals}
+          />
+        ))}
+      </div>
 
       <Pagination page={page} totalPages={totalPages} setPage={setPage} />
-      {/* <SelectedMeals
-        selectedMealIds={selectedMeals.map((meal) => meal.idMeal)}
-      /> */}
     </div>
   );
 };

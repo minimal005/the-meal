@@ -17,8 +17,11 @@ export const Pagination: React.FC<Props> = ({ page, totalPages, setPage }) => {
   }
 
   return (
-    <div className="pagination">
-      <button onClick={() => setPage((prev) => Math.max(prev - 1, 1))}>
+    <div className="flex justify-center items-center space-x-2 mt-6 ">
+      <button
+        onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+        className="px-3 py-1 bg-transparent rounded-md  transition disabled:opacity-50"
+      >
         {"<"}
       </button>
 
@@ -36,7 +39,10 @@ export const Pagination: React.FC<Props> = ({ page, totalPages, setPage }) => {
         )
       )}
 
-      <button onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}>
+      <button
+        onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+        className="px-3 py-1 bg-transparent rounded-md  transition disabled:opacity-50"
+      >
         {">"}
       </button>
     </div>

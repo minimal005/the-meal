@@ -25,7 +25,7 @@ export const MealCard: React.FC<Props> = ({
   };
 
   return (
-    <div className="border rounded-lg overflow-hidden shadow-md bg-white">
+    <div className="border rounded-lg overflow-hidden shadow-md bg-white w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
       <img
         src={`${meal.strMealThumb}/medium`}
         alt={meal.strMeal}
