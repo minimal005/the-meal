@@ -5,14 +5,14 @@ type Props = {
   meal: Meal;
   selectedMeals: Meal[];
   setSelectedMeals: React.Dispatch<React.SetStateAction<Meal[]>>;
-  fixedHeight?: boolean; // Додаємо пропс для контролю висоти
+  fixedHeight?: boolean;
 };
 
 export const MealCard: React.FC<Props> = ({
   meal,
   selectedMeals,
   setSelectedMeals,
-  fixedHeight = false, // За замовчуванням висота не фіксована
+  fixedHeight = false,
 }) => {
   const isSelected = selectedMeals.some(
     (currentMeal) => currentMeal.idMeal === meal.idMeal
@@ -28,14 +28,27 @@ export const MealCard: React.FC<Props> = ({
 
   return (
     <div
-      className={`border rounded-lg overflow-hidden shadow-md bg-white w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex flex-col ${
-        fixedHeight ? "h-[300px]" : "h-auto"
+      className={`relative border rounded-lg overflow-hidden shadow-md bg-white flex flex-col w-[310px] ${
+        fixedHeight ? "h-[320px]" : "h-auto"
       }`}
     >
+      {/* Сердечко у верхньому правому куті */}
+      <label className="absolute top-2 right-2 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={isSelected}
+          onChange={handleSelect}
+          className="sr-only peer"
+        />
+        <span className="w-8 h-8 flex items-center justify-center rounded-full border border-white/70 bg-transparent text-white/70 text-lg transition-all duration-200 peer-checked:bg-red-500 peer-checked:text-white">
+          ❤️
+        </span>
+      </label>
+
       <img
         src={meal.strMealThumb}
         alt={meal.strMeal}
-        className="w-full h-40 object-cover"
+        className="w-full h-44 object-cover"
       />
 
       <div className="p-4 flex-grow flex flex-col">
@@ -50,16 +63,6 @@ export const MealCard: React.FC<Props> = ({
         <p className="text-sm text-gray-600 text-center">
           {meal.strCategory} • {meal.strArea}
         </p>
-
-        <div className="mt-3 flex items-center justify-center">
-          <input
-            type="checkbox"
-            checked={isSelected}
-            onChange={handleSelect}
-            className="w-5 h-5 accent-blue-600"
-          />
-          <span className="ml-2 text-sm">Add to favorites</span>
-        </div>
       </div>
     </div>
   );
