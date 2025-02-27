@@ -26,7 +26,8 @@ export default function App() {
           path="/favorites"
           element={
             <Favorites
-              selectedMealIds={selectedMeals.map((meal) => meal.idMeal)}
+              selectedMeals={selectedMeals}
+              setSelectedMeals={setSelectedMeals}
             />
           }
         />
